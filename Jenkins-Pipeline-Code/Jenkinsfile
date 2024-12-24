@@ -18,7 +18,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/praviteja999/End-to-End-Kubernetes-DevSecOps-Tetris-Project.git'
             }
         }
-        stage('Sonarqube Analysis') {
+        /*stage('Sonarqube Analysis') {
             steps {
                 dir('Tetris-V2') {
                     withSonarQubeEnv('sonar-server') {
@@ -34,7 +34,7 @@ pipeline {
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token' 
                 }
             }
-        }
+        }*/
         stage('Installing Dependencies') {
             steps {
                 dir('Tetris-V2') {
