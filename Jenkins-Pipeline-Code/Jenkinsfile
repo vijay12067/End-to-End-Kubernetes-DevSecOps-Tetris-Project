@@ -99,7 +99,7 @@ pipeline {
                 dir('Manifest-file') {
                     withCredentials([string(credentialsId: 'praviteja999', variable: 'github-token')]) {
                         sh '''
-                            git config user.email "praviteja999@protonmai.com"
+                            git config user.email "praviteja999@protonmail.com"
                             git config user.name "praviteja999"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
