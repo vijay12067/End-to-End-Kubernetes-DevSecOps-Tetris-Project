@@ -42,14 +42,14 @@ pipeline {
                 }
             }
         }
-        /*stage('OWASP Dependency-Check Scan') {
+        stage('OWASP Dependency-Check Scan') {
             steps {
                 dir('Tetris-V2') {
                     dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                    dependencyCheckPublisher pattern: '**dependency-check-report.xml' #we need to add the / before dependency
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
-        }*/
+        }
         stage('Trivy File Scan') {
             steps {
                 dir('Tetris-V2') {
