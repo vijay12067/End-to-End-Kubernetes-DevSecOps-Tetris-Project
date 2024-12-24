@@ -108,7 +108,7 @@ pipeline {
                             sed -i "s/tetrisv2:${imageTag}/tetrisv2:${BUILD_NUMBER}/" deployment-service.yml
                             git add deployment-service.yml
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                            git push https://${github-token}@github.com/praviteja999/End-to-End-Kubernetes-DevSecOps-Tetris-Project HEAD:main
+                            git push https://github.com/praviteja999/End-to-End-Kubernetes-DevSecOps-Tetris-Project HEAD:main
                         '''
                     }
                 }
