@@ -5,7 +5,7 @@ pipeline {
         nodejs 'nodejs'
     }
     environment  {
-        SCANNER_HOME=tool 'sonar-scanner'
+        SCANNER_HOME = tool 'sonar-scanner'
     }
     stages {
         stage('Cleaning Workspace') {
@@ -108,7 +108,12 @@ pipeline {
                             sed -i "s/tetrisv2:${imageTag}/tetrisv2:${BUILD_NUMBER}/" deployment-service.yml
                             git add deployment-service.yml
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                            git push https://github.com/praviteja999/End-to-End-Kubernetes-DevSecOps-Tetris-Project HEAD:main
+
+                            # Configure git remote URL with GitHub token for authentication
+                            git remote set-url origin https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
+
+                            # Push the changes
+                            git push origin HEAD:main
                         '''
                     }
                 }
