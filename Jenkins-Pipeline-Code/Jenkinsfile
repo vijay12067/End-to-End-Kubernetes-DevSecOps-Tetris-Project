@@ -1,11 +1,13 @@
 pipeline {
-    agent any 
+    agent any
     tools {
         jdk 'java17'
         nodejs 'nodejs'
     }
-    environment  {
+    environment {
         SCANNER_HOME = tool 'sonar-scanner'
+        GIT_REPO_NAME = "End-to-End-Kubernetes-DevSecOps-Tetris-Project"
+        GIT_USER_NAME = "praviteja999"
     }
     stages {
         stage('Cleaning Workspace') {
@@ -91,13 +93,9 @@ pipeline {
             }
         }
         stage('Update Deployment file') {
-            environment {
-                GIT_REPO_NAME = "End-to-End-Kubernetes-DevSecOps-Tetris-Project"
-                GIT_USER_NAME = "praviteja999"
-            }
             steps {
                 dir('Manifest-file') {
-                    withCredentials([string(credentialsId: 'praviteja999', variable: 'github-token')]) {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'github_token')]) {
                         sh '''
                             git config user.email "praviteja999@protonmail.com"
                             git config user.name "praviteja999"
@@ -110,7 +108,7 @@ pipeline {
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
 
                             # Configure git remote URL with GitHub token for authentication
-                            git remote set-url origin https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
+                            git remote set-url origin https://${GIT_USER_NAME}:${github_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
 
                             # Push the changes
                             git push origin HEAD:main
