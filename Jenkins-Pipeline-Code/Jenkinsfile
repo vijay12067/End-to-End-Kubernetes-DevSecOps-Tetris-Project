@@ -20,7 +20,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/praviteja999/End-to-End-Kubernetes-DevSecOps-Tetris-Project.git'
             }
         }
-        /*stage('Sonarqube Analysis') {
+        stage('Sonarqube Analysis') {
             steps {
                 dir('Tetris-V2') {
                     withSonarQubeEnv('sonar-server') {
@@ -36,7 +36,7 @@ pipeline {
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token' 
                 }
             }
-        }*/
+        }
         stage('Installing Dependencies') {
             steps {
                 dir('Tetris-V2') {
@@ -44,14 +44,14 @@ pipeline {
                 }
             }
         }
-        /*stage('OWASP Dependency-Check Scan') {
+        stage('OWASP Dependency-Check Scan') {
             steps {
                 dir('Tetris-V2') {
                     dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                    dependencyCheckPublisher pattern: '**dependency-check-report.xml' // add /d after dependency
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
-        }*/
+        }
         stage('Trivy File Scan') {
             steps {
                 dir('Tetris-V2') {
